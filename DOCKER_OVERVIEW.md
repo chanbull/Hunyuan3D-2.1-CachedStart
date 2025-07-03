@@ -18,7 +18,7 @@ This repository provides comprehensive Docker support for running Hunyuan3D-2.1 
 docker build --no-cache -t kechiro/hunyuan3d:2.1 -f docker/Dockerfile .
 
 # Run with GUI (with persistent cache for faster subsequent starts)
-docker run --gpus all -p 8080:7860 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d:2.1 python3 gradio_app.py
+docker run --gpus all -p 8080:8080 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d:2.1 python3 gradio_app.py
 
 # Run API server (with the same persistent cache)
 docker run --gpus all -p 8081:8081 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d:2.1 python3 api_server.py
@@ -33,6 +33,7 @@ The Docker image includes the following components:
 - All dependencies for Hunyuan3D-2.1
 - Pre-configured model cache directories for immediate use
 - Pre-compiled custom rasterizers for optimal performance
+- Optimized sample image gallery (108 high-quality examples)
 
 ## 💾 Persistent Model Cache - The CachedStart Advantage
 

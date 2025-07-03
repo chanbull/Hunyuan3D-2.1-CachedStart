@@ -102,8 +102,8 @@ RUN mkdir -p /workspace/model_cache/huggingface /workspace/model_cache/hy3dgen
 ENV HF_HOME=/workspace/model_cache/huggingface
 ENV HF_MODULES_CACHE=/workspace/model_cache/huggingface/modules
 
-#exposing 7860 port
-EXPOSE 7860
+#exposing 8080 port
+EXPOSE 8080
 
 # Cleanup
 RUN rm -f /workspace/*.zip && \
