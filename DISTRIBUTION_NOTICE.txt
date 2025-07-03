@@ -1,0 +1,15 @@
+TENCENT HUNYUAN 3D 2.1 - CACHED START VERSION
+
+This is a modified version of Tencent Hunyuan 3D 2.1 with improved persistent cache functionality.
+Original repository: https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1
+
+Modifications:
+1. Added persistent model cache functionality in start scripts
+2. Fixed API server infinite loop error by setting appropriate cache directories
+3. Improved README with clearer instructions for model caching
+
+All modifications are made in accordance with the Tencent Hunyuan 3D 2.1 Community License Agreement.
+The original license terms apply to this distribution.
+
+Copyright © 2025 Tencent. All Rights Reserved.
+The trademark rights of "Tencent Hunyuan" are owned by Tencent or its affiliate.

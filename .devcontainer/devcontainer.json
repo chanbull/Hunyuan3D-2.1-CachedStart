@@ -1,0 +1,42 @@
+{
+    "name": "Hunyuan3D-2.1-CachedStart",
+    "image": "kechiro/hunyuan3d-2.1-cachedstart:latest",
+    "runArgs": [
+        "--gpus", "all",
+        "--shm-size", "8gb"
+    ],
+    "remoteUser": "root",
+    "containerEnv": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUNBUFFERED": "1",
+        "PYOPENGL_PLATFORM": "egl",
+        "HF_HOME": "/workspace/model_cache/huggingface",
+        "HF_MODULES_CACHE": "/workspace/model_cache/huggingface/modules",
+        "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:512"
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-azuretools.vscode-docker",
+                "nvidia.nsight-vscode-edition"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/workspace/miniconda3/envs/hunyuan3d21/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "explicit"
+                },
+                "jupyter.jupyterServerType": "local"
+            }
+        }
+    },
+    "forwardPorts": [7860, 8081],
+    "postCreateCommand": "mkdir -p /workspace/model_cache/huggingface /workspace/model_cache/hy3dgen /workspace/save_dir",
+    "postStartCommand": "echo 'Development container for Hunyuan3D-2.1-CachedStart started successfully!'"
+}
