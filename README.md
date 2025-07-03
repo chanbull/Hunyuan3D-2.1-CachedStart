@@ -8,7 +8,7 @@
 > 
 > **Key Improvements:**
 > - 🔄 **Persistent Model Cache**: Avoids 18GB re-downloads on subsequent startups
-> - ⚡ **Fast Restart**: Second launch takes seconds instead of minutes
+> - ⚡ **Faster Restart**: Cached models reduce startup time (~1 minute vs 10+ minutes)
 > - 💾 **Docker-Ready**: Cache persists across container restarts
 > - 🛠️ **Production Ready**: Enhanced scripts for reliable deployment
 
@@ -151,15 +151,6 @@ You could also host a [Gradio](https://www.gradio.app/) App in your own computer
 
 
 ```bash
-python3 gradio_app.py \
-  --model_path tencent/Hunyuan3D-2.1 \
-  --subfolder hunyuan3d-dit-v2-1 \
-  --texgen_model_path tencent/Hunyuan3D-2.1 \
-  --low_vram_mode
-
-You could also host a [Gradio](https://www.gradio.app/) App in your own computer via:
-
-```bash
 ## Default: Uses port 8080. If busy, an available port will be selected automatically.
 python3 gradio_app.py \
   --model_path tencent/Hunyuan3D-2.1 \
@@ -216,6 +207,11 @@ python3 api_server.py \
   --device cuda
 ```
 
+## 📄 Citation
+
+```bibtex
+@misc{hunyuan3d21tencent,
+    title={Hunyuan3D 2.1: Scaling Diffusion Models for High Resolution Textured 3D Assets Generation},
     author={Tencent Hunyuan3D Team},
     year={2025},
     eprint={2506.15442},
@@ -248,6 +244,7 @@ This repository is an enhanced fork of the original [Tencent-Hunyuan/Hunyuan3D-2
 
 ### 🚀 Enhanced Features
 - **Persistent Model Caching**: Models are cached in `./model_cache/` to avoid 18GB re-downloads
+- **Faster Startup**: Cached models reduce initialization time (~1 minute vs 10+ minutes without cache)
 - **Fast Startup Scripts**: `start_app.sh` and `start_api.sh` with optimized environment setup
 - **Docker Integration**: Full containerization support with persistent volumes
 - **Production Ready**: Enhanced error handling and logging capabilities

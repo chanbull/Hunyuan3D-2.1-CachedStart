@@ -7,7 +7,7 @@
 > 
 > **Key Improvements:**
 > - 🔄 **Persistent Model Cache**: Avoids 18GB re-downloads on subsequent startups
-> - ⚡ **Fast Restart**: Second launch takes seconds instead of minutes
+> - ⚡ **Faster Startup**: Cached models reduce initialization time (~1 minute vs 10+ minutes without cache)
 > - 💾 **Docker-Ready**: Cache persists across container restarts
 > - 🛠️ **Production Ready**: Enhanced scripts for reliable deployment
 
@@ -21,7 +21,7 @@ Hunyuan3D-2.1 is an AI system that generates high-quality 3D models from 2D imag
 
 ### ✨ Key Features
 - 🖼️ **Image-to-3D**: Generate 3D meshes + textures from 2D images
-- ⚡ **Fast Startup**: Persistent cache prevents 18GB re-downloads
+- ⚡ **Faster Startup**: Persistent cache prevents 18GB re-downloads (initialization ~1 minute)
 - 🔗 **REST API**: Professional API for programmatic integration
 - 🎮 **Game Integration**: Direct Unity/Unreal Engine support
 - 🐳 **Docker Ready**: Fully containerized environment
