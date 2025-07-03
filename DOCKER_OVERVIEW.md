@@ -15,13 +15,13 @@ This repository provides comprehensive Docker support for running Hunyuan3D-2.1 
 
 ```bash
 # Build the image
-docker build --no-cache -t kechiro/hunyuan3d:2.1 -f docker/Dockerfile .
+docker build --no-cache -t kechiro/hunyuan3d-2.1-cachedstart:latest -f docker/Dockerfile .
 
 # Run with GUI (with persistent cache for faster subsequent starts)
-docker run --gpus all -p 8080:8080 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d:2.1 python3 gradio_app.py
+docker run --gpus all -p 8080:8080 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d-2.1-cachedstart:latest python3 gradio_app.py
 
 # Run API server (with the same persistent cache)
-docker run --gpus all -p 8081:8081 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d:2.1 python3 api_server.py
+docker run --gpus all -p 8081:8081 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d-2.1-cachedstart:latest python3 api_server.py
 ```
 
 ## 📦 Docker Image Configuration
@@ -82,8 +82,8 @@ Key environment variables available in the Docker container:
 
 ## 📋 Supported Tags
 
-- `kechiro/hunyuan3d:2.1` - Latest stable CachedStart release
-- `kechiro/hunyuan3d:2.1-fresh` - Fresh build with clean cache
+- `kechiro/hunyuan3d-2.1-cachedstart:latest` - Latest stable CachedStart release
+- `kechiro/hunyuan3d-2.1-cachedstart:v2.1` - Version tagged release
 
 ## ⚡ Performance Comparison
 
