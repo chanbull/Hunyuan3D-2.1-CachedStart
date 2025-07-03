@@ -198,9 +198,20 @@ hy3dpaint/ckpt/RealESRGAN_x4plus.pth
 *.ply
 *.stl
 *.mtl
-*.jpg
-*.png
-*.jpeg
+
+# Generated texture files (exclude documentation images)
+demo_*.jpg
+demo_*.png
+demo_*.jpeg
+output_*.jpg
+output_*.png
+output_*.jpeg
+generated_*.jpg
+generated_*.png
+generated_*.jpeg
+
+# But keep documentation assets
+!assets/**
 
 # Temporary processing files
 *.tmp
