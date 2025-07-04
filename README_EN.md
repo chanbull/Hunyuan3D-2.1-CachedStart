@@ -82,8 +82,6 @@ python3 api_server.py \
 ## 📚 Documentation
 
 ### 🎯 Use Case Guides
-- **[Game Development](docs/en/game-development.md)** - Unity/Unreal integration
-- **[API Development](docs/en/api-reference.md)** - REST API specifications
 - **[Distribution](docs/ja/distribution.md)** - License-compliant sharing
 
 ### 🔧 Technical Documentation
