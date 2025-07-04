@@ -247,6 +247,7 @@ This repository is an enhanced fork of the original [Tencent-Hunyuan/Hunyuan3D-2
 - **Faster Startup**: Cached models reduce initialization time (~1 minute vs 10+ minutes without cache)
 - **Fast Startup Scripts**: `start_app.sh` and `start_api.sh` with optimized environment setup
 - **Docker Integration**: Full containerization support with persistent volumes
+- **Pre-built Docker Images**: Available on [Docker Hub](https://hub.docker.com/r/kechiro/hunyuan3d-2.1-cachedstart) for instant deployment
 - **Production Ready**: Enhanced error handling and logging capabilities
 - **Optimized Texture Generation**: Stable settings (4 views, 512 resolution) for RTX4090
 - **Auto-Download Support**: RealESRGAN model automatically downloaded if missing
@@ -268,6 +269,9 @@ model_cache/
 
 # API Server (developers)  
 ./start_api.sh           # → http://localhost:8081/docs
+
+# Docker (instant deployment)
+docker run --gpus all -p 8080:8080 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d-2.1-cachedstart:latest python3 gradio_app.py
 ```
 
 **Original Repository**: [https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1](https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1)  

@@ -62,6 +62,15 @@ docker run --gpus all -p 8080:8080 -v ./model_cache:/workspace/model_cache kechi
 docker run --gpus all -p 8081:8081 -v ./model_cache:/workspace/model_cache kechiro/hunyuan3d-2.1-cachedstart:latest python3 api_server.py
 ```
 
+### Docker Compose (Recommended)
+```bash
+# Using docker-compose for easier management
+docker-compose up -d
+
+# Stop services
+docker-compose down
+```
+
 ### Interactive Shell
 ```bash
 # Start interactive shell for debugging
@@ -76,21 +85,25 @@ The CachedStart fork's key feature is the persistent model cache:
 # The model_cache directory structure
 model_cache/
 ├── huggingface/          # HuggingFace models cache (~10GB+)
+│   ├── models--tencent--Hunyuan3D-2/    # Main 3D generation model
+│   ├── models--microsoft--DiT-XL-2-256/ # Diffusion transformer
+│   └── modules/          # Shared HuggingFace modules
 ├── hy3dgen/              # Hunyuan3D specific models
 └── .u2net/               # Background removal models
 ```
 
 **Benefits:**
-- ✅ **First run**: Downloads all models (~10-15 minutes)
+- ✅ **First run**: Downloads all models (~15-20 minutes)
 - ✅ **Subsequent runs**: Near-instant startup (30-60 seconds)
 - ✅ **Container restarts**: No re-downloading required
+- ✅ **Multiple containers**: Shared cache across instances
 
 ## 🔍 Build Logs and Troubleshooting
 
 ### Expected Build Time
-- **Initial build**: 15-30 minutes (depending on internet speed)
-- **CUDA compilation**: 5-10 minutes for custom rasterizers
-- **Total image size**: ~8-10 GB
+- **Initial build**: 20-35 minutes (depending on internet speed)
+- **CUDA compilation**: 8-15 minutes for custom rasterizers
+- **Total image size**: ~12-15 GB
 
 ### Common Issues
 
@@ -111,8 +124,15 @@ model_cache/
    ```
 
 4. **Memory issues during build**
-   - Increase Docker Desktop memory limit (8GB+ recommended)
+   - Increase Docker Desktop memory limit (16GB+ recommended)
    - Close other applications during build
+   - Use `--memory=16g` flag if needed
+
+5. **PyTorch/CUDA version conflicts**
+   ```bash
+   # Verify CUDA version inside container
+   docker run --rm --gpus all kechiro/hunyuan3d-2.1-cachedstart:latest nvidia-smi
+   ```
 
 ## 📊 Build Progress Monitoring
 
@@ -122,22 +142,24 @@ The build process includes these major steps:
    - NVIDIA CUDA 12.4.1 Ubuntu 22.04
    - System dependencies installation
 
-2. **Conda Environment** (5-8 minutes)
+2. **Conda Environment** (8-12 minutes)
    - Miniconda installation
    - Python 3.10 environment setup
-   - CUDA toolkit installation
+   - CUDA toolkit and PyTorch installation
 
-3. **Repository Clone** (1-2 minutes)
+3. **Repository Clone & Dependencies** (3-5 minutes)
    - Clone CachedStart repository
-   - Install Python dependencies
+   - Install Python dependencies from requirements.txt
 
-4. **Custom Compilation** (5-10 minutes)
+4. **Custom Compilation** (8-15 minutes)
    - Custom rasterizer compilation
    - DifferentiableRenderer setup
+   - CUDA kernel compilation
 
-5. **Model Downloads** (2-5 minutes)
+5. **Model Downloads & Configuration** (2-5 minutes)
    - RealESRGAN model download
    - Path configuration updates
+   - Cache directory setup
 
 ## 🎯 Verification
 
@@ -147,15 +169,22 @@ After successful build, verify the image:
 # Check image size and details
 docker images kechiro/hunyuan3d-2.1-cachedstart
 
-# Test the container
-docker run --rm kechiro/hunyuan3d-2.1-cachedstart:latest python3 -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}')"
+# Test PyTorch and CUDA
+docker run --rm --gpus all kechiro/hunyuan3d-2.1-cachedstart:latest python3 -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}'); print(f'CUDA devices: {torch.cuda.device_count()}')"
+
+# Test custom rasterizer
+docker run --rm --gpus all kechiro/hunyuan3d-2.1-cachedstart:latest python3 -c "from hy3dpaint.custom_rasterizer import Custom_Rasterizer; print('Custom rasterizer loaded successfully')"
 ```
 
 ## 📝 Next Steps
 
 1. **Start the WebUI**: Access http://localhost:8080
-2. **Upload sample images**: Use optimized gallery (108 examples)
-3. **Generate 3D models**: Test shape generation
-4. **Try texture synthesis**: Test PBR texture generation
+2. **Upload sample images**: Use optimized gallery (108 examples in `assets/example_images/`)
+3. **Generate 3D models**: Test shape generation with various prompts
+4. **Try texture synthesis**: Test PBR texture generation with materials
+5. **API Integration**: Use REST API at http://localhost:8081/docs
 
-For more details, see [DOCKER_OVERVIEW.md](DOCKER_OVERVIEW.md).
+For more details, see:
+- [DOCKER_OVERVIEW.md](DOCKER_OVERVIEW.md) - Detailed architecture overview
+- [README.md](README.md) - Usage instructions and examples
+- [setup-instructions.md](setup-instructions.md) - Alternative setup methods
