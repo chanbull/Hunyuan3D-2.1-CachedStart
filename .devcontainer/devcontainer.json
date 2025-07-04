@@ -2,8 +2,10 @@
     "name": "Hunyuan3D-2.1-CachedStart",
     "image": "kechiro/hunyuan3d-2.1-cachedstart:latest",
     "runArgs": [
-        "--gpus", "all",
-        "--shm-size", "8gb"
+        "--gpus",
+        "all",
+        "--shm-size",
+        "8gb"
     ],
     "remoteUser": "root",
     "containerEnv": {
@@ -12,9 +14,11 @@
         "PYOPENGL_PLATFORM": "egl",
         "HF_HOME": "/workspace/model_cache/huggingface",
         "HF_MODULES_CACHE": "/workspace/model_cache/huggingface/modules",
-        "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:512"
+        "PYTORCH_CUDA_ALLOC_CONF": "max_split_size_mb:512",
+        "TERMINFO": "/usr/share/terminfo"
     },
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/workspace",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -36,7 +40,10 @@
             }
         }
     },
-    "forwardPorts": [7860, 8081],
-    "postCreateCommand": "mkdir -p /workspace/model_cache/huggingface /workspace/model_cache/hy3dgen /workspace/save_dir",
-    "postStartCommand": "echo 'Development container for Hunyuan3D-2.1-CachedStart started successfully!'"
+    "forwardPorts": [
+        7860,
+        8081
+    ],
+    "postCreateCommand": "echo 'Model cache persistence enabled'",
+    "postStartCommand": "cd /workspace && echo 'Development container started - Model cache: $(du -sh /workspace/model_cache 2>/dev/null || echo \"empty\")'"
 }
