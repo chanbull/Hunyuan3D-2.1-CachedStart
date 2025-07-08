@@ -13,7 +13,7 @@
 > - 🛠️ **Production Ready**: Enhanced scripts for reliable deployment
 
 ## 📖 Quick Start Guides  
-> **[Game Developers (English)](README_EN.md)** | **[ゲーム開発者向け（日本語）](README_JP.md)**  
+> **[Developers (English)](README_EN.md)** | **[開発者向け（日本語）](README_JP.md)**  
 > For detailed integration guides: **[docs/en/](docs/en/)** | **[docs/ja/](docs/ja/)**
 
 <div align="center">
