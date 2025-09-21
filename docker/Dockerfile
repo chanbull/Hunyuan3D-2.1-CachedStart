@@ -40,7 +40,7 @@ ENV PATH="/workspace/miniconda3/bin:${PATH}"
 RUN conda init bash
 
 # create and activate conda environment
-RUN conda create -n hunyuan3d21 python=3.10 && echo "source activate hunyuan3d21" > ~/.bashrc
+RUN conda create -n hunyuan3d21 python=3.11 && echo "source activate hunyuan3d21" > ~/.bashrc
 ENV PATH="/workspace/miniconda3/envs/hunyuan3d21/bin:${PATH}"
 
 # Set conda to always auto-approve
